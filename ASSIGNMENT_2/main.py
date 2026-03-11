@@ -198,12 +198,16 @@ def get_order(order_id: int):
     return {"error": "Order not found"}
 
 
-@app.patch("/orders/{order_id}/confirm")
-def confirm_order(order_id: int):
+@app.get("/orders/{order_id}/confirm")
+def confirm_order_browser(order_id: int):
 
     for order in orders:
         if order["order_id"] == order_id:
             order["status"] = "confirmed"
-            return {"message": "Order confirmed", "order": order}
+
+            return {
+                "message": "Order confirmed",
+                "order": order
+            }
 
     return {"error": "Order not found"}
